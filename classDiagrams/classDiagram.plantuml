@@ -1,0 +1,131 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+package "controllers" {
+  class adminController {
+    +getProductData()
+    +putProductData()
+    +getInventory()
+    +getOrders()
+    +getFeedbacks()
+  }
+  class cartController {
+    +getCart()
+  }
+  class categoryController {
+    +getCategories()
+    +getCategoriesById()
+    +getCategoryProducts()
+    +postCategories()
+    +putCategories()
+    +deleteCategories()
+  }
+  class locationController {
+    +getLocation()
+    +setLocation()
+    +updateLocation()
+    +deleteLocation()
+  }
+  class loginController {
+    +login()
+    +checkToken()
+  }
+  class orderController {
+    +getOrders()
+    +getOrder()
+    +postOrders()
+  }
+  class productController {
+    +getProducts()
+    +getProductById()
+    +getProductsByCategory()
+    +postProducts()
+    +putProducts()
+    +deleteProducts()
+  }
+  class searchController {
+    +searchDatabase()
+  }
+  class userController {
+    +getUsers()
+    +getUserByToken()
+    +getUser()
+    +getUserCart()
+    +getUserOrders()
+    +getUserReviews()
+    +putUsers()
+    +putUserCart()
+    +postUserOrder()
+    +postUsers()
+    +deleteUsers()
+  }
+}
+
+package "routes" {
+  class adminRouter
+  class cartRouter
+  class categoryRouter
+  class locationRouter
+  class loginRouter
+  class orderRouter
+  class productRouter
+  class searchRouter
+  class userRouter
+  class index
+}
+
+package "middlewares" {
+  class verifyToken
+}
+
+package "db::modelFacade" {
+  class Category
+  class Order
+  class Product
+  class Review
+  class User
+  class UserCredentials
+}
+
+package "prisma" {
+  class schema.prisma
+  class seed.js
+  class migrations
+}
+
+package "utils" {
+  class randomInterval {
+    +randomIntFromInterval()
+  }
+}
+
+class app
+
+index --> adminRouter
+index --> cartRouter
+index --> categoryRouter
+index --> locationRouter
+index --> loginRouter
+index --> orderRouter
+index --> productRouter
+index --> searchRouter
+index --> userRouter
+
+adminRouter --> adminController
+cartRouter --> cartController
+categoryRouter --> categoryController
+locationRouter --> locationController
+loginRouter --> loginController
+orderRouter --> orderController
+productRouter --> productController
+searchRouter --> searchController
+userRouter --> userController
+
+adminRouter --> verifyToken
+cartRouter --> verifyToken
+locationRouter --> verifyToken
+orderRouter --> verifyToken
+userRouter --> verifyToken
+
+@enduml

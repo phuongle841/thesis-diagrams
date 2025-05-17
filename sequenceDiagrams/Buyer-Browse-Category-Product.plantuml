@@ -1,0 +1,20 @@
+@startuml
+actor Buyer
+participant "categoryRouter" as CR
+participant "categoryController" as CC
+participant "prisma" as DB
+
+Buyer -> CR: GET /categories
+CR -> CC: getCategories()
+CC -> DB: fetch all categories
+DB --> CC: category list
+CC --> CR: response
+CR --> Buyer: display categories
+
+Buyer -> CR: GET /categories/:id/products
+CR -> CC: getCategoryProducts(id)
+CC -> DB: query products by category ID
+DB --> CC: product list
+CC --> CR: response
+CR --> Buyer: show products in category
+@enduml

@@ -1,0 +1,16 @@
+@startuml ReviewDomain
+title Review Domain - Class Diagram
+
+class Review {
+  reviewId: Int
+  reviewTitle: String
+  reviewDescription: String
+  reviewDate: DateTime
+  reviewRating: Int
+  reviewHelpfulness: Int
+}
+
+Review "1" -- "1" User : reviewer
+Review "1" -- "1" Product
+
+@enduml

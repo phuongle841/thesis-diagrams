@@ -1,0 +1,13 @@
+@startuml
+actor Seller
+participant "productRouter" as PR
+participant "productController" as PC
+participant "prisma" as DB
+
+Seller -> PR: POST /products
+PR -> PC: postProducts(productData)
+PC -> DB: create Product
+DB --> PC: product ID
+PC --> PR: confirmation
+PR --> Seller: product listed
+@enduml

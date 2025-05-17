@@ -1,0 +1,13 @@
+@startuml
+package "User Domain" {
+  class User
+  class UserCredentials
+  User -- UserCredentials
+}
+
+package "Product Domain" {
+  class Product
+  class Category
+  Product -- Category
+}
+@enduml

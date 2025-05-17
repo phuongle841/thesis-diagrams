@@ -1,0 +1,16 @@
+@startuml
+actor Administrator
+participant "adminRouter" as AR
+participant "adminController" as AC
+participant "modelFacade::Review" as ReviewModel
+participant "prisma" as DB
+
+Administrator -> AR: GET /admin/feedbacks
+AR -> AC: getFeedbacks()
+AC -> ReviewModel: fetch all reviews
+ReviewModel -> DB: query reviews with users and products
+DB --> ReviewModel: review list
+ReviewModel --> AC: reviews
+AC --> AR: response
+AR --> Administrator: show reviews
+@enduml

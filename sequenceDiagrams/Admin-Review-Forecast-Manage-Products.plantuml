@@ -1,0 +1,23 @@
+@startuml
+actor Administrator
+participant "adminRouter" as AR
+participant "adminController" as AC
+participant "modelFacade::Product" as ProductModel
+participant "utils::forecasting" as ForecastUtil
+
+Administrator -> AR: GET /admin/forecast
+AR -> AC: getProductData()
+AC -> ProductModel: fetch all products with sales
+ProductModel --> AC: product sales data
+AC -> ForecastUtil: runForecast(data)
+ForecastUtil --> AC: prediction result
+AC --> AR: forecast result
+AR --> Administrator: display forecast
+
+Administrator -> AR: PUT /admin/products
+AR -> AC: putProductData(productId, updates)
+AC -> ProductModel: update product
+ProductModel --> AC: confirmation
+AC --> AR: response
+AR --> Administrator: product updated
+@enduml

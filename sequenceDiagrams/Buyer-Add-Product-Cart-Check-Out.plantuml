@@ -1,0 +1,22 @@
+@startuml
+actor Buyer
+participant "cartRouter" as CR
+participant "cartController" as CC
+participant "prisma" as DB
+participant "orderRouter" as OR
+participant "orderController" as OC
+
+Buyer -> CR: POST /cart/add
+CR -> CC: addProductToCart(userId, productId, quantity)
+CC -> DB: update CartRecord
+DB --> CC: confirmation
+CC --> CR: response
+CR --> Buyer: cart updated
+
+Buyer -> OR: POST /order
+OR -> OC: postOrders(orderDetails)
+OC -> DB: create Order
+DB --> OC: order record
+OC --> OR: response
+OR --> Buyer: order confirmed
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+actor Buyer
+participant "productRouter" as PR
+participant "productController" as PC
+participant "prisma" as DB
+
+Buyer -> PR: GET /products
+PR -> PC: getProducts()
+PC -> DB: fetch product list
+DB --> PC: product data
+PC --> PR: JSON response
+PR --> Buyer: display product list
+
+Buyer -> PR: GET /products/:id
+PR -> PC: getProductById(id)
+PC -> DB: fetch product by ID
+DB --> PC: product details
+PC --> PR: JSON response
+PR --> Buyer: display product details
+@enduml

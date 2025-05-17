@@ -1,0 +1,16 @@
+@startuml
+actor User
+participant "loginRouter" as LR
+participant "loginController" as LC
+participant "prisma" as DB
+participant "utils::jwt" as JWT
+
+User -> LR: POST /login
+LR -> LC: login(credentials)
+LC -> DB: find user by email
+DB --> LC: user record
+LC -> JWT: generate token
+JWT --> LC: token
+LC --> LR: login success + token
+LR --> User: login response
+@enduml

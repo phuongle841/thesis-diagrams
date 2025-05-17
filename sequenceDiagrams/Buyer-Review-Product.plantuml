@@ -1,0 +1,14 @@
+@startuml
+actor Buyer
+participant "productRouter" as PR
+participant "productController" as PC
+participant "prisma" as DB
+participant "review model" as Review
+
+Buyer -> PR: POST /products/:id/review
+PR -> PC: postReview(productId, reviewData)
+PC -> DB: create Review entry
+DB --> PC: review created
+PC --> PR: response
+PR --> Buyer: review posted
+@enduml

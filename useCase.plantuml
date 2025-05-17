@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+skinparam backgroundColor #E0F3FF
+
+actor Buyer
+actor Seller
+actor Administrator
+
+rectangle "Online Marketplace" {
+  (Search for Product) as Search
+  (View Recommended Products) as Recommended
+  (View Product Details) as ViewDetails
+  (Add Product to Cart) as AddToCart
+  (Checkout) as Checkout
+
+  (Post Product for Sale) as PostProduct
+  (Manage Product) as ManageProduct
+  (Manage Orders) as ManageOrders
+  (Review Forecasting) as ReviewForecasting
+
+  (Manage Payments) as ManagePayments
+  (Manage Users) as ManageUsers
+  (Manage Predict Algorithm) as PredictAlgorithm
+
+  Search --> Recommended : <<extend>>
+
+  Buyer --> Search
+  Buyer --> ViewDetails
+  Buyer --> AddToCart
+  Buyer --> Checkout
+
+  Seller --> PostProduct
+  Seller --> ManageProduct
+  Seller --> ManageOrders
+  Seller --> ReviewForecasting
+
+  Administrator --> ManagePayments
+  Administrator --> ManageUsers
+  Administrator --> PredictAlgorithm
+}
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+title Component Diagram - MVC Architecture
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing true
+
+' Frontend Clients
+package "Frontend Clients" {
+  [FrontEnd-User] <<React App>>
+  [FrontEnd-Admin] <<React App>>
+}
+
+' Backend Application (Node.js/Express MVC)
+package "Backend (Node.js/Express)" {
+  [View Layer (Routes)]
+  [Controller Layer]
+  [Model Layer (Prisma ORM)]
+  [Utilities/Middleware]
+}
+
+' Database
+database "PostgreSQL" as DB
+
+' Dependencies (Simplified)
+[FrontEnd-User] --> [View Layer (Routes)]
+[FrontEnd-Admin] --> [View Layer (Routes)]
+
+[View Layer (Routes)] --> [Controller Layer]
+[Controller Layer] --> [Model Layer (Prisma ORM)]
+[Controller Layer] --> [Utilities/Middleware]
+
+[Model Layer (Prisma ORM)] --> DB
+
+@enduml

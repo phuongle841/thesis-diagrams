@@ -1,0 +1,20 @@
+@startuml UserDomain
+title User Domain - Class Diagram
+
+class User {
+  userId: Int
+  userName: String
+  phoneNumber: String
+  userAvatarUrl: String
+  userBackgroundUrl: String
+  predictFlavour: TrainingModel
+}
+
+class UserCredentials {
+  userEmail: String
+  password: String
+}
+
+User "1" -- "1" UserCredentials
+
+@enduml

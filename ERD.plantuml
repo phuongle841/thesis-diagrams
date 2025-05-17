@@ -1,0 +1,128 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define enum(x) class x << (E,#FFD700) >>
+
+' Entities (Tables)
+table(Product) {
+  + productId : Int
+  productName : String
+  productImages : String[]
+  productRating : Int?
+  productPrice : Float
+  productOrderAmount : String?
+  productDescription : String
+  productDetails : String
+  link : String?
+  addDate : DateTime
+  inStock : Int
+  userId : Int?
+}
+
+table(Cart) {
+  + cartId : Int
+  userId : Int
+  updateTime : DateTime
+}
+
+table(CartRecord) {
+  + CartId : Int
+  + ProductId : Int
+  quantity : Int
+}
+
+table(Category) {
+  + categoryId : Int
+  categoryImage : String?
+  categoryTitle : String
+  categoryDescription : String
+}
+
+table(User) {
+  + userId : Int
+  userName : String
+  phoneNumber : String?
+  userAvatarUrl : String?
+  userBackgroundUrl : String?
+  predictFlavour : TrainingModel
+}
+
+table(UserCredentials) {
+  + UserId : Int
+  userEmail : String?
+  password : String
+}
+
+table(Location) {
+  + locationId : Int
+  userId : Int
+  address : String
+  postcode : String?
+  nation : String?
+}
+
+table(Review) {
+  + reviewId : Int
+  reviewTitle : String
+  reviewDescription : String
+  reviewDate : DateTime
+  reviewRating : Int
+  reviewHelpfulness : Int?
+  reviewerId : Int
+  productId : Int
+}
+
+table(Order) {
+  + orderId : Int
+  orderDate : DateTime
+  orderDeliveryDate : DateTime?
+  orderPaymentDate : DateTime?
+  paid : Boolean
+  orderStatus : OrderStatus
+  UserId : Int
+  ProductId : Int
+  quantity : Int
+}
+
+' Enums
+enum(OrderStatus) {
+  PREPARED
+  SHIPPING
+  DONE
+}
+
+enum(TrainingModel) {
+  ARIMA
+  SARIMA
+  SARIMAX
+  AUTOARIMA
+}
+
+' Relationships
+Product }o--|| User : owner
+Product }o--o{ Category
+Product ||--o{ Order
+Product ||--o{ Review
+Product ||--o{ CartRecord
+
+Cart ||--|| User : has
+Cart ||--o{ CartRecord
+
+CartRecord }|--|| Product
+CartRecord }|--|| Cart
+
+User ||--|| UserCredentials
+User ||--o{ Product
+User ||--o{ Review
+User ||--o{ Location
+User ||--o{ Order
+User ||--|| Cart
+
+Review }|--|| User : reviewer
+Review }|--|| Product
+
+Order }|--|| User : orderUser
+Order }|--|| Product
+
+Location }|--|| User
+UserCredentials }|--|| User
+@enduml

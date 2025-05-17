@@ -1,0 +1,25 @@
+@startuml ProductDomain
+title Product and Category Domain - Class Diagram
+
+class Product {
+  productId: Int
+  productName: String
+  productImages: String[]
+  productRating: Int
+  productPrice: Float
+  productOrderAmount: String
+  productDescription: String
+  productDetails: String
+  addDate: DateTime
+  inStock: Int
+}
+
+class Category {
+  categoryId: Int
+  categoryTitle: String
+  categoryDescription: String
+}
+
+Product "N" -- "N" Category : belongsTo
+
+@enduml
