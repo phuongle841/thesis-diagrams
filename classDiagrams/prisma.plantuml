@@ -1,0 +1,22 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+package "db::modelFacade" {
+  class Category
+  class Order
+  class Product
+  class Review
+  class User
+  class UserCredentials
+}
+
+package "prisma" {
+  class schema.prisma
+  class seed.js
+  class migrations
+}
+
+prisma --> db::modelFacade
+
+@enduml

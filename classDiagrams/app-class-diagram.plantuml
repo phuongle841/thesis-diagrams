@@ -79,27 +79,6 @@ package "middlewares" {
   class verifyToken
 }
 
-package "db::modelFacade" {
-  class Category
-  class Order
-  class Product
-  class Review
-  class User
-  class UserCredentials
-}
-
-package "prisma" {
-  class schema.prisma
-  class seed.js
-  class migrations
-}
-
-package "utils" {
-  class randomInterval {
-    +randomIntFromInterval()
-  }
-}
-
 class app
 
 app   --> index
@@ -128,7 +107,5 @@ cartRouter --> verifyToken
 locationRouter --> verifyToken
 orderRouter --> verifyToken
 userRouter --> verifyToken
-
-prisma --> db::modelFacade
 
 @enduml
